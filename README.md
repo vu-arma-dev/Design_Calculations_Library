@@ -1,5 +1,7 @@
 # Design_Calculations_Library
-This repository provides a library of MATLAB functions used to calculate design metrics for various common mechanical components.
+This repository provides a library of MATLAB functions used to calculate design metrics for various common mechanical components. The inputs of each function are described in the code comments
+
+ARMA Lab Members: http://arma.vuse.vanderbilt.edu/mediawiki/Design_Calculations_Library
 
 ## Bearings
 * ```ball_bearing_fatigue.m```: Calculates the fatigue life of a ball bearing in number of cycles
