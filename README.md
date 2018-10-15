@@ -13,7 +13,7 @@ ARMA Lab Members: http://arma.vuse.vanderbilt.edu/mediawiki/Design_Calculations_
   * Gear ratio is not a whole number
   * Maximum number of gear teeth
   * Minimum Number of pinion teeth
-  * Contact ratio if greater than 1.4
+  * Contact ratio is greater than 1.4
   * Pinion tooth bending stress FOS is greater than 1
   * Gear tooth bending stress FOS is greater than 1
 * ```Gear_design_check_example.m```: Shows an example call of ```gear_design_check.m``` for a pair of McMaster gears that fail the design check
