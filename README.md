@@ -18,3 +18,6 @@ ARMA Lab Members: http://arma.vuse.vanderbilt.edu/mediawiki/Design_Calculations_
   * Gear tooth bending stress FOS is greater than 1
 * ```Gear_design_check_example.m```: Shows an example call of ```gear_design_check.m``` for a pair of McMaster gears that fail the design check
 * ```Lewis_form_factor20deg_splinefit.mat```: MATLAB splinefit that is used to calculate the Lewis form factor in ``` gear_design_check.m ```
+## Keys
+* ```Woodruff_key_recommendation_inch.m```: Calculates a recommended woodruff key for a shaft of specified diameter
+ 
