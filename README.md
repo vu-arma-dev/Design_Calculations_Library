@@ -21,5 +21,6 @@ ARMA Lab Members: http://arma.vuse.vanderbilt.edu/mediawiki/Design_Calculations_
 ## Keys
 * ```Woodruff_key_recommendation_inch.m```: Calculates a recommended inch woodruff key for a shaft of specified diameter in inches
 * ```key_stresses.m```: Calculates the average shear stress, compressive bearing stress, first principle stress, and FOS for the key.
+* ```Square_key_recommendation_inch.m```: Calculates a recommended square key/setscrew combo for a given shaft size. This script only sizes the side width of the key, the length can be designed to meet strength requirements.
 # Disclaimer
 Although these equations are intended to be correct, final designs should not rely on these scripts for critical design calculations.   
