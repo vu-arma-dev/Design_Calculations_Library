@@ -1,6 +1,7 @@
 function [ key_number, width, length, height ] = Woodruff_key_recommendation_inch( shaft_diameter )
-%% WOODRUFF_KEY_RECOMMENDATION: Recommends an inch woodruff key for a given shaft diameter of range 7-16 in to 2.5 inches. Based on ANSI Standard B17.2.
+%% WOODRUFF_KEY_RECOMMENDATION: Recommends an inch woodruff key for a given shaft diameter of range 7/16 to 2.5 inches. Based on ANSI Standard B17.2.
 %% [1] J. Collins, H. Busby and G. Staab, Mechanical design of machine elements and machines, 2nd ed. Hoboken: John Wiley & Sons, 2010.
+% Table 8.2. Page 367
 %% Garrison Johnston 10/16/2018
 %% INPUTS:
 % shaft_diameter: The diameter of the shaft where the key will be placed
@@ -26,7 +27,7 @@ elseif (((13/16)<= shaft_diameter) && (shaft_diameter <= 15/16))
     width = 5/32;
     length = 3/4;
     height = 0.312;
-elseif ((1<= shaft_diameter <= (1+3/16)) && (shaft_diameter <= (1+3/16)))
+elseif ((1<= shaft_diameter) && (shaft_diameter <= (1+3/16)))
     key_number = 608;
     width = 3/16;
     length = 1;
