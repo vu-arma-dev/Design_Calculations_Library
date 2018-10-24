@@ -14,8 +14,12 @@ ARMA Lab Members: http://arma.vuse.vanderbilt.edu/mediawiki/Design_Calculations_
   * Maximum number of gear teeth
   * Minimum Number of pinion teeth
   * Contact ratio is greater than 1.4
-  * Pinion tooth bending stress FOS is greater than 1
-  * Gear tooth bending stress FOS is greater than 1
+  * Pinion tooth bending stress FOS using the lewis form factor
+  * Gear tooth bending stress FOS using the lewis form factor
+  * Pinion tooth bending stress FOS using the AGMA equations
+  * Gear tooth bending stress FOS using the AGMA equations
+  * Calculates the surface fatigue life adjustment factors, ZN
+  * Calculates the radial and tangental forces on the gear pair
 * ```Gear_design_check_example.m```: Shows an example call of ```gear_design_check.m``` for a pair of McMaster gears that fail the design check
 * ```Lewis_form_factor20deg_splinefit.mat```: MATLAB splinefit that is used to calculate the Lewis form factor in ``` gear_design_check.m ```
 ## Keys
