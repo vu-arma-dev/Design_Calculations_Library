@@ -22,7 +22,7 @@ F = torque/(shaft_diameter/2); % Compressive force in the key
 %% Average Shear stress
 As = width*length; % Area of the shearing plane
 shear_stress = F/As;
-%% Compressive bearign stress
+%% Compressive bearing stress
 Acomp = height*length; % Area of the bearing stress contact plane
 compressive_stress = F/Acomp;
 %% First Principle Stress
@@ -31,4 +31,4 @@ principle_stress_1 = compressive_stress/2+sqrt((compressive_stress/2)^2+shear_st
 %% Factor of safety
 FOS = yield_stress/principle_stress_1;
 end
-
+    
