@@ -1,8 +1,10 @@
 function gear_design_check(units, Np, Ng, dp, dg, Fp, Fg, ysp, ysg, Ep, Eg, vp, vg, BHNp, BHNg, Tp, kf)
-% gear_design_check: checks if a 20deg pressure gear-pinion pair meets 
-% the design requirements set on the "Gear Design" ARMA Wiki Page
-
-% INPUTS:
+%% gear_design_check: checks if a 20deg pressure gear-pinion pair meets a set of design requirements and calcuates the design life using the American Gear Manufacturers Association Method
+%% Citations  
+% [1] J. Collins, H. Busby and G. Staab, Mechanical design of machine elements and machines, 2nd ed. Hoboken: John Wiley & Sons, 2010.
+% Chapter 8.8. Pages 631-643
+% [2] The "Gear Design" page on the ARMA Wiki (http://arma.vuse.vanderbilt.edu/mediawiki/Gear_design)
+%% INPUTS:
 %  units -- 'met' for metric or 'in' for inch
 %  Np -- Number of teeth on pinion
 %  Ng -- Number of teeth on gear
@@ -21,15 +23,18 @@ function gear_design_check(units, Np, Ng, dp, dg, Fp, Fg, ysp, ysg, Ep, Eg, vp, 
 %  Tp -- Maximum torque on the pinion [lbf*in or N*m]
 %  kf -- struct of knockdown factors: Mechanical Design of Machine Elements and Machines, Collins/Busby/Staab
 
-% Revision History:
+%% Revision History:
 % 7/23/18: File Created -- Garrison Johnston
 % 7/26/2018: Fixed incorrect Wt and Ng_max calculation. Added a check if
 % the gear ratio is a whole number. -- Garrison Johnston
 % 10/15/18: added AGMA calculations -- Andrew Orekhov
-
+% 10/25/2018: added printing for contact stresses and bending life
+%             adjustment factor -- Garrison Johnston
+%% Setup Directories
+addpath(genpath([cd, '\Charts']));
 %% Constants
-k = 1;                   % Geometric Factor for full depth teeth
-phi = 20; %pressure angle [degrees]
+k = 1;    % Geometric Factor for full depth teeth
+phi = 20; % Pressure angle [degrees]
 
 %% Calculate gear parameters
 C = (dp+dg)/2;           % [mm or in] -- center distance
@@ -41,8 +46,12 @@ rbg = mg*Ng/2*cosd(phi); % [mm or in] -- gear base circle radius
 rap = mp*(Np+2)/2;       % [mm or in] -- pinion addendum circle radius
 rag = mg*(Ng+2)/2;       % [mm or in] -- pinion addendum circle radius
 pd = Ng/dg;              % Gear Diametral Pitch
-
-%% Check that eithe 'met' or 'in' was used
+if strcmp(units,'met')
+    stress_unit = 'MPa';
+else 
+    stress_unit = 'psi';
+end
+%% Check that either 'met' or 'in' was used
 if ~(strcmp(units,'met') || strcmp(units,'in'))
     error('''%s'' is not a valid string for units.',units);
 end
@@ -157,9 +166,9 @@ FOSp = ysp/sigma_p;
 FOSg = ysg/sigma_g;
 
 if FOSp < 1
-    fprintf('[\bFail: The lewis bending stress in the pinion (%0.3d MPa) is greater than the material yield stress. FOS = %0.3f]\b\n', sigma_p, FOSp)
+    fprintf('[\bFail: The lewis bending stress in the pinion (%0.3d %s) is greater than the material yield stress. FOS = %0.3f]\b\n', sigma_p, stress_unit, FOSp)
 else
-    fprintf('Pass: The lewis bending stress in the pinion (%0.3d MPa) is less than the material yield stress. FOS = %0.3f\n', sigma_p, FOSp)
+    fprintf('Pass: The lewis bending stress in the pinion (%0.3d %s) is less than the material yield stress. FOS = %0.3f\n', sigma_p, stress_unit, FOSp)
 end
 
 disp('-----------------------------------------------')
@@ -167,9 +176,9 @@ disp('| Gear Bending Stress FOS - Lewis Form Factor |')
 disp('-----------------------------------------------')
 
 if FOSg < 1
-    fprintf('[\bFail: The lewis bending stress in the gear (%0.3d MPa) is greater than the material yield stress. FOS = %0.3f]\b\n', sigma_g, FOSg)
+    fprintf('[\bFail: The lewis bending stress in the gear (%0.3d %s) is greater than the material yield stress. FOS = %0.3f]\b\n', sigma_g, stress_unit, FOSg)
 else
-    fprintf('Pass: The lewis bending stress in the gear (%0.3d MPa) is less than the material yield stress. FOS = %0.3f\n', sigma_g, FOSg)
+    fprintf('Pass: The lewis bending stress in the gear (%0.3d %s) is less than the material yield stress. FOS = %0.3f\n', sigma_g, stress_unit, FOSg)
 end
 
 %% Calculate bending stress using AGMA equations
@@ -180,34 +189,72 @@ disp('----------------------------------------------')
 sigma_p_AGMA = Wtp/(mp*Fp*kf.Jp)*kf.Ka*kf.Kv*kf.Km*kf.Ki; %note that module here is either in [mm] or [in]
 sigma_g_AGMA = Wtg/(mg*Fg*kf.Jg)*kf.Ka*kf.Kv*kf.Km*kf.Ki;
 
-FOSp_AGMA = ysp/sigma_p_AGMA;
-FOSg_AGMA = ysg/sigma_g_AGMA;
+FOSp_AGMA_bending = ysp/sigma_p_AGMA;
+FOSg_AGMA_bending = ysg/sigma_g_AGMA;
 
-if FOSp_AGMA < 1
-    fprintf('[\bFail: The AGMA bending stress in the pinion (%0.3d MPa) is greater than the material yield stress. FOS = %0.3f]\b\n', sigma_p_AGMA, FOSp_AGMA)
+if FOSp_AGMA_bending < 1
+    fprintf('[\bFail: The AGMA bending stress in the pinion (%0.3d %s) is greater than the material yield stress. FOS = %0.3f]\b\n', sigma_p_AGMA, stress_unit, FOSp_AGMA_bending)
 else
-    fprintf('Pass: The AGMA bending stress in the pinion (%0.3d MPa) is less than the material yield stress. FOS = %0.3f\n', sigma_p_AGMA, FOSp_AGMA)
+    fprintf('Pass: The AGMA bending stress in the pinion (%0.3d %s) is less than the material yield stress. FOS = %0.3f\n', sigma_p_AGMA, stress_unit, FOSp_AGMA_bending)
 end
 disp('--------------------------------------------')
 disp('| Gear Bending Stress FOS - AGMA Equations |')
 disp('--------------------------------------------')
-if FOSg_AGMA < 1
-    fprintf('[\bFail: The AGMA bending stress in the gear (%0.3d MPa) is greater than the material yield stress. FOS = %0.3f]\b\n', sigma_g_AGMA, FOSg_AGMA)
+if FOSg_AGMA_bending < 1
+    fprintf('[\bFail: The AGMA bending stress in the gear (%0.3d %s) is greater than the material yield stress. FOS = %0.3f]\b\n', sigma_g_AGMA, stress_unit, FOSg_AGMA_bending)
 else
-    fprintf('Pass: The AGMA bending stress in the gear (%0.3d MPa) is less than the material yield stress. FOS = %0.3f\n', sigma_g_AGMA, FOSg_AGMA)
+    fprintf('Pass: The AGMA bending stress in the gear (%0.3d %s) is less than the material yield stress. FOS = %0.3f\n', sigma_g_AGMA, stress_unit, FOSg_AGMA_bending)
 end
+%% Tooth Bending Fatigue - AGMA Equations
+disp('------------------------------------------');
+disp('| Tooth Bending Fatigue - AGMA Equations |');
+disp('------------------------------------------');
 
-%% Pitting Surface Fatigue - AGMA Equations
-% Contact stress
-Cp = sqrt(1/(pi*( (1-vp^2)/(Ep) + (1-vg^2)/(Eg) )));
-I = sind(phi)*cosd(phi)*0.5*(R/(R+1)); %geometry factor
+if strcmp(units, 'met')
+    psi_over_MPA = 145.0377;
+    Stbf_prime_p = (77.3*BHNp+12800)/psi_over_MPA; % MPa
+    Stbf_prime_g = (77.3*BHNg+12800)/psi_over_MPA; % MPa
+else 
+    Stbf_prime_p = (77.3*BHNp+12800); % psi
+    Stbf_prime_g = (77.3*BHNg+12800); % psi
+end 
+YN_p = sigma_p_AGMA/(kf.Rg*Stbf_prime_p);
+YN_g = sigma_g_AGMA/(kf.Rg*Stbf_prime_g);
 
-if strcmp(units, 'in')
-    sigma_sf_p = Cp*sqrt(Wtp*kf.Ka*kf.Kv*kf.Km/(pd*Fp*I*25.4)); %[psi]
-    sigma_sf_g = Cp*sqrt(Wtg*kf.Ka*kf.Kv*kf.Km/(pd*Fg*I*25.4)); %[psi]
+fprintf('YN for pinion: %0.3f \n', YN_p);
+fprintf('YN for gear: %0.3f \n', YN_g);
+fprintf('[\bLook at chart to find fatigue life in cycles ]\b\n');
+open('YN.pdf');
+
+%% Surface Stress - AGMA Equations
+
+Cp = sqrt(1/(pi*( (1-vp^2)/(Ep) + (1-vg^2)/(Eg) ))); % Elastic Coefficient
+I = sind(phi)*cosd(phi)*0.5*(R/(R+1)); % geometry factor
+
+% Contact Stresses
+sigma_sf_p = Cp*sqrt(Wtp*kf.Ka*kf.Kv*kf.Km/(dp*Fp*I)); %[MPa or psi]
+sigma_sf_g = Cp*sqrt(Wtg*kf.Ka*kf.Kv*kf.Km/(dp*Fg*I)); %[MPa or psi]
+
+% FOS
+FOSp_AGMA_sf = ysp/sigma_sf_p;
+FOSg_AGMA_sf = ysg/sigma_sf_g;
+
+disp('-------------------------------------------------------')
+disp('| Pinion Surface Contact Stress FOS  - AGMA Equations |')
+disp('-------------------------------------------------------')
+
+if FOSp_AGMA_sf < 1
+    fprintf('[\bFail: The AGMA surface contact stress in the pinion (%0.3d %s) is greater than the material yield stress. FOS = %0.3f]\b\n', sigma_sf_p, stress_unit ,FOSp_AGMA_sf)
 else
-    sigma_sf_p = Cp*sqrt(Wtp*kf.Ka*kf.Kv*kf.Km/(dp*Fp*I)); %[MPa]
-    sigma_sf_g = Cp*sqrt(Wtg*kf.Ka*kf.Kv*kf.Km/(dp*Fg*I)); %[MPa]
+    fprintf('Pass: The AGMA surface contact stress in the pinion (%0.3d %s) is less than the material yield stress. FOS = %0.3f\n', sigma_sf_p, stress_unit, FOSp_AGMA_sf)
+end
+disp('----------------------------------------------------')
+disp('| Gear Surface Contact Stress FOS - AGMA Equations |')
+disp('----------------------------------------------------')
+if FOSg_AGMA_sf < 1
+    fprintf('[\bFail: The AGMA surface contact stress in the gear (%0.3d %s) is greater than the material yield stress. FOS = %0.3f]\b\n', sigma_sf_g, stress_unit, FOSg_AGMA_sf)
+else
+    fprintf('Pass: The AGMA surface contact stress in the gear (%0.3d %s) is less than the material yield stress. FOS = %0.3f\n', sigma_sf_g, stress_unit, FOSg_AGMA_sf)
 end
 
 %% Surface Fatigue Life - AGMA Equations
@@ -215,17 +262,21 @@ disp('------------------------------------');
 disp('| Surface Fatigue - AGMA Equations |');
 disp('------------------------------------');
 
-psi_over_MPA = 145.0377;
-Ssf_prime_p = (322*BHNp+29100)/psi_over_MPA; %MPa
-Ssf_prime_g = (322*BHNg+29100)/psi_over_MPA; %MPa
+if strcmp(units, 'met');
+    Ssf_prime_p = (322*BHNp+29100)/psi_over_MPA; %MPa
+    Ssf_prime_g = (322*BHNg+29100)/psi_over_MPA; %MPa
+else
+    Ssf_prime_p = (322*BHNp+29100); % psi
+    Ssf_prime_g = (322*BHNg+29100); % psi
+end
 
 ZN_p = sigma_sf_p/(kf.Rg*Ssf_prime_p);
 ZN_g = sigma_sf_g/(kf.Rg*Ssf_prime_g);
 
 fprintf('ZN for pinion: %0.3f \n', ZN_p);
 fprintf('ZN for gear: %0.3f \n', ZN_g);
-fprintf('[\bLook at chart for ZN checks ]\b\n');
-
+fprintf('[\bLook at chart to find fatigue life in cycles ]\b\n');
+open('ZN.pdf');
 
 %% Output the Maximum radial load
 disp('-------------------------------');
@@ -233,11 +284,11 @@ disp('| Tangential and Radial Loads |');
 disp('-------------------------------');
 
 if strcmp(units, 'in')
-fprintf('Pitch line tangential force: %0.2f lb\n',Wtp);
-fprintf('Radial load: %0.2f lb \n',Wtp*tand(20));
+    fprintf('Pitch line tangential force: %0.2f lb\n',Wtp);
+    fprintf('Radial load: %0.2f lb \n',Wtp*tand(20));
 else
-fprintf('Pitch line tangential force: %0.2f N\n',Wtp);
-fprintf('Radial load: %0.2f N \n',Wtp*tand(20));
+    fprintf('Pitch line tangential force: %0.2f N\n',Wtp);
+    fprintf('Radial load: %0.2f N \n',Wtp*tand(20));
 end
 
 end
