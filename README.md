@@ -18,7 +18,7 @@ ARMA Lab Members: http://arma.vuse.vanderbilt.edu/mediawiki/Design_Calculations_
   * Gear tooth bending stress FOS using the lewis form factor
   * Pinion tooth bending stress FOS using the AGMA equations
   * Gear tooth bending stress FOS using the AGMA equations
-  * Calculates the surface fatigue life adjustment factors, YN
+  * Calculates the bending fatigue life adjustment factors, YN
   * Calculates the surface fatigue life adjustment factors, ZN
   * Calculates the radial and tangental forces on the gear pair
 * ```Gear_design_check_example.m```: Shows an example call of ```gear_design_check.m``` for a pair of McMaster gears that fail the design check
