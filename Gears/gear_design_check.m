@@ -231,9 +231,9 @@ open('YN.pdf');
 Cp = sqrt(1/(pi*( (1-vp^2)/(Ep) + (1-vg^2)/(Eg) ))); % Elastic Coefficient
 I = sind(phi)*cosd(phi)*0.5*(R/(R+1)); % geometry factor
 
-% Contact Stresses
+% Contact Fatigue Stresses
 sigma_sf_p = Cp*sqrt(Wtp*kf.Ka*kf.Kv*kf.Km/(dp*Fp*I)); %[MPa or psi]
-sigma_sf_g = Cp*sqrt(Wtg*kf.Ka*kf.Kv*kf.Km/(dp*Fg*I)); %[MPa or psi]
+sigma_sf_g = Cp*sqrt(Wtg*kf.Ka*kf.Kv*kf.Km/(dg*Fg*I)); %[MPa or psi]
 
 disp('------------------------------------');
 disp('| Surface Fatigue - AGMA Equations |');
