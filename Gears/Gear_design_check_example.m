@@ -33,7 +33,7 @@ knockdown_factors.Ki = 1.42; %idler factor
 knockdown_factors.Rg = 1.18; % reliability factor (90%)
 
 %% Torque in Pinion 
-T_max = 5; % [lbf-in]
+T_max = 10; % [lbf-in]
 
 %% Run Design Rules Check
 gear_design_check('in', N_7880K38, N_7880K44, d_7880K38, d_7880K44, F_7880K38,F_7880K44, ys_7880K38, ys_7880K44, E_7880K38, E_7880K44, v_7880K38, v_7880K44, BHN_7880K38, BHN_7880K44, T_max, knockdown_factors);
