@@ -15,7 +15,7 @@ function gear_design_check(units, Np, Ng, dp, dg, Fp, Fg, ysp, ysg, Ep, Eg, vp, 
 %  ysp -- Pinion material yield stress [MPa or psi]
 %  ysg -- Gear Material yield stress [MPa or psi]
 %  Ep -- pinion modulus of elasticity [Mpa or psi]
-%  Eg -- gear moduls of elasticity [MPa or psi]
+%  Eg -- gear modulus of elasticity [MPa or psi]
 %  vp -- pinion poisson's ratio
 %  vg -- gear poisson's ratio
 %  BHNp -- pinion brinell hardness number
@@ -235,29 +235,6 @@ I = sind(phi)*cosd(phi)*0.5*(R/(R+1)); % geometry factor
 sigma_sf_p = Cp*sqrt(Wtp*kf.Ka*kf.Kv*kf.Km/(dp*Fp*I)); %[MPa or psi]
 sigma_sf_g = Cp*sqrt(Wtg*kf.Ka*kf.Kv*kf.Km/(dp*Fg*I)); %[MPa or psi]
 
-% FOS
-FOSp_AGMA_sf = ysp/sigma_sf_p;
-FOSg_AGMA_sf = ysg/sigma_sf_g;
-
-disp('-------------------------------------------------------')
-disp('| Pinion Surface Contact Stress FOS  - AGMA Equations |')
-disp('-------------------------------------------------------')
-
-if FOSp_AGMA_sf < 1
-    fprintf('[\bFail: The AGMA surface contact stress in the pinion (%0.3d %s) is greater than the material yield stress. FOS = %0.3f]\b\n', sigma_sf_p, stress_unit ,FOSp_AGMA_sf)
-else
-    fprintf('Pass: The AGMA surface contact stress in the pinion (%0.3d %s) is less than the material yield stress. FOS = %0.3f\n', sigma_sf_p, stress_unit, FOSp_AGMA_sf)
-end
-disp('----------------------------------------------------')
-disp('| Gear Surface Contact Stress FOS - AGMA Equations |')
-disp('----------------------------------------------------')
-if FOSg_AGMA_sf < 1
-    fprintf('[\bFail: The AGMA surface contact stress in the gear (%0.3d %s) is greater than the material yield stress. FOS = %0.3f]\b\n', sigma_sf_g, stress_unit, FOSg_AGMA_sf)
-else
-    fprintf('Pass: The AGMA surface contact stress in the gear (%0.3d %s) is less than the material yield stress. FOS = %0.3f\n', sigma_sf_g, stress_unit, FOSg_AGMA_sf)
-end
-
-%% Surface Fatigue Life - AGMA Equations
 disp('------------------------------------');
 disp('| Surface Fatigue - AGMA Equations |');
 disp('------------------------------------');
