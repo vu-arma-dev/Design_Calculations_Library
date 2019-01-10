@@ -1,5 +1,5 @@
 # Design_Calculations_Library
-This repository provides a library of MATLAB functions used to calculate design metrics for various common mechanical components. The inputs of each function are described in the code comments. Most codes based off methods recommended in in [1].
+This repository provides a library of MATLAB functions used to calculate design metrics for various common mechanical components. The inputs of each function are described in the code comments. Most codes based off methods recommended in [1].
 
 ARMA Lab Members: http://arma.vuse.vanderbilt.edu/mediawiki/Design_Calculations_Library
 
