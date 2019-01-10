@@ -1,5 +1,5 @@
 # Design_Calculations_Library
-This repository provides a library of MATLAB functions used to calculate design metrics for various common mechanical components. The inputs of each function are described in the code comments
+This repository provides a library of MATLAB functions used to calculate design metrics for various common mechanical components. The inputs of each function are described in the code comments. Most codes based off methods recommended in in [1].
 
 ARMA Lab Members: http://arma.vuse.vanderbilt.edu/mediawiki/Design_Calculations_Library
 
@@ -27,5 +27,9 @@ ARMA Lab Members: http://arma.vuse.vanderbilt.edu/mediawiki/Design_Calculations_
 * ```Woodruff_key_recommendation_inch.m```: Calculates a recommended inch woodruff key for a shaft of specified diameter in inches
 * ```key_stresses.m```: Calculates the average shear stress, compressive bearing stress, first principle stress, and FOS for the key.
 * ```Square_key_recommendation_inch.m```: Calculates a recommended square key/setscrew combo for a given shaft size. This script only sizes the side width of the key, the length can be designed to meet strength requirements.
+## Shafts
+* ```fatigue_strength.m```: Calculates the fatigue strength of a shaft given a series of knockdown factors. Pass [] into the function to use default values as recommended in [1].
+# References
+## [1] J. Collins, H. Busby and G. Staab, Mechanical design of machine elements and machines, 2nd ed. Hoboken: John Wiley & Sons, 2010. 
 # Disclaimer
 Although these equations are intended to be correct, final designs should not rely on these scripts for critical design calculations.   
