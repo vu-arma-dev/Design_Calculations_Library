@@ -25,7 +25,7 @@ ARMA Lab Members: http://arma.vuse.vanderbilt.edu/mediawiki/Design_Calculations_
 * ```Lewis_form_factor20deg_splinefit.mat```: MATLAB splinefit that is used to calculate the Lewis form factor in ``` gear_design_check.m ```
 ## Keys
 * ```Woodruff_key_recommendation_inch.m```: Calculates a recommended inch woodruff key for a shaft of specified diameter in inches
-* ```key_stresses.m```: Calculates the average shear stress, compressive bearing stress, first principle stress, and FOS for the key.
+* ```key_stresses.m```: Calculates the average shear stress, compressive bearing stress, and FOS against compression and shear for the key. Gives the option of using Von Mises or Tresca theory to determine maximum allowable shear stress.
 * ```Square_key_recommendation_inch.m```: Calculates a recommended square key/setscrew combo for a given shaft size. This script only sizes the side width of the key, the length can be designed to meet strength requirements.
 ## Shafts
 * ```fatigue_strength.m```: Calculates the fatigue strength of a shaft given a series of knockdown factors. Pass [] into the function to use default values as recommended in [1].
