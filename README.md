@@ -2,7 +2,8 @@
 This repository provides a library of MATLAB functions used to calculate design metrics for various common mechanical components. The inputs of each function are described in the code comments. Most codes based off methods recommended in [1].
 
 ARMA Lab Members: http://arma.vuse.vanderbilt.edu/mediawiki/Design_Calculations_Library
-
+## Beams
+* ```euler_bucking.m```: Calculates the critical bucking force for straight, uniform, axially loaded beams using the Euler equation
 ## Bearings
 * ```ball_bearing_fatigue.m```: Calculates the fatigue life of a ball bearing in number of cycles
 * ```crossed_bearing_fatigue.m```: Calculates the axial, moment, and static equivalent FOSs for a crossed roller bearing. It also calculates the fatigue life in number of cycles.
