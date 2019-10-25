@@ -1,7 +1,7 @@
 # Design_Calculations_Library
 This repository provides a library of MATLAB functions used to calculate design metrics for various common mechanical components. The inputs of each function are described in the code comments. Most codes based off methods recommended in [1].
 
-ARMA Lab Members: http://arma.vuse.vanderbilt.edu/mediawiki/Design_Calculations_Library
+ARMA Lab Members: http://arma.vuse.vanderbilt.edu/mediawiki/index.php/Design_Calculations_Library
 ## Beams
 * ```euler_bucking.m```: Calculates the critical bucking force for straight, uniform, axially loaded beams using the Euler equation
 ## Bearings
@@ -29,7 +29,7 @@ ARMA Lab Members: http://arma.vuse.vanderbilt.edu/mediawiki/Design_Calculations_
 * ```key_stresses.m```: Calculates the average shear stress, compressive bearing stress, and FOS against compression and shear for the key. Gives the option of using Von Mises or Tresca theory to determine maximum allowable shear stress.
 * ```Square_key_recommendation_inch.m```: Calculates a recommended square key/setscrew combo for a given shaft size. This script only sizes the side width of the key, the length can be designed to meet strength requirements.
 ## Shafts
-* ```fatigue_strength.m```: Calculates the fatigue strength of a shaft given a series of knockdown factors. Pass [] into the function to use default values as recommended in [1].
+* ```fatigue_strength.m```: Calculates the fatigue strength of a shaft given a series of knockdown factors. Pass [] into the function to use default values as recommended in [1]. Note the corresponding equation in [1] has an error which was fixed in the code. See errata for [1] for more information.
 * ```min_shaft_diameter.m```: Calculates the minimum shaft diameter for shafts in bending and torsion given a desired number of cycles and factor of safety.
 * ```Shaft_diameter_example.m```: Provides example calls of ```fatigue_strength.m``` and ```min_shaft_diameter.m```.
 # References
