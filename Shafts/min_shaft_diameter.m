@@ -28,6 +28,7 @@ function d = min_shaft_diameter(S_u, n_d, S_N, K_fb, M_a, K_ft, T_a, M_m, T_m)
 % d: recommended shaft diameter
 %% Revision History:
 % 1/10/19: File Created -- Garrison Johnston
+% 10/25/19: Fixed mistake in equation 8-8 of [1]
 %% Recommended shaft diameter (Eq. 8-8 of [1])
-d = (16/(pi*S_u)*(n_d*S_u/S_N*((2*K_fb*M_a)^2+3*(K_ft*T_a)^2)^(1/2)+((2*M_m)^2+3*T_m^2)^(1/3)))^(1/3);
+d = (16/(pi*S_u)*(n_d*S_u/S_N*((2*K_fb*M_a)^2+3*(K_ft*T_a)^2)^(1/2)+((2*M_m)^2+3*T_m^2)^(1/2)))^(1/3);
 end
