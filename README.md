@@ -32,7 +32,11 @@ ARMA Lab Members: http://arma.vuse.vanderbilt.edu/mediawiki/index.php/Design_Cal
 * ```fatigue_strength.m```: Calculates the fatigue strength of a shaft given a series of knockdown factors. Pass [] into the function to use default values as recommended in [1]. Note the corresponding equation in [1] has an error which was fixed in the code. See errata for [1] for more information.
 * ```min_shaft_diameter.m```: Calculates the minimum shaft diameter for shafts in bending and torsion given a desired number of cycles and factor of safety.
 * ```Shaft_diameter_example.m```: Provides example calls of ```fatigue_strength.m``` and ```min_shaft_diameter.m```.
+## Springs
+* ```spring_rate.m```: Calculates the rate of a spring in N/m given the spring's outer diameter in meters, wire diameter in meters, Shear modulus in Pa, and number of coils.
+* ```spring_max_deflection.m```: Calculates the maximum allowable deflection in a spring given the spring's outer diameter in meters, wire diameter in meters, Shear modulus in Pa, number of coils, desired safety factor against yielding, and yeild stress in Pa.
 # References
 [1] J. Collins, H. Busby and G. Staab, Mechanical design of machine elements and machines, 2nd ed. Hoboken: John Wiley & Sons, 2010. 
+[2] Budynas, R. G., and Nisbett, J. K., 2011. Shigley’s mechanical engineering design, 9 ed. McGraw-Hill Education.
 # Disclaimer
 Although these equations are intended to be correct, final designs should not rely on these scripts for critical design calculations.   

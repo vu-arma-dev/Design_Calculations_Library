@@ -1,8 +1,7 @@
 %% Gear_design_check_example
 %{
 This script gives an example call of the gear_design_check function for 
-two McMaster gears 7880K38 and 7880K44. You will see that the gears do not
-meet a design rules check because the pinion and gear surface stress FOS is <1.
+two McMaster gears 7880K38 and 7880K44.
 %}
 %% Garrison Johnston 10/25/2018
 %% 7880K38 specs (pinion)
