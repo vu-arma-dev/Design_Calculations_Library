@@ -33,8 +33,8 @@ ARMA Lab Members: http://arma.vuse.vanderbilt.edu/mediawiki/index.php/Design_Cal
 * ```min_shaft_diameter.m```: Calculates the minimum shaft diameter for shafts in bending and torsion given a desired number of cycles and factor of safety.
 * ```Shaft_diameter_example.m```: Provides example calls of ```fatigue_strength.m``` and ```min_shaft_diameter.m```.
 ## Springs
-* ```spring_rate.m```: Calculates the rate of a spring in N/m given the spring's outer diameter in meters, wire diameter in meters, Shear modulus in Pa, and number of coils.
-* ```spring_max_deflection.m```: Calculates the maximum allowable deflection in a spring given the spring's outer diameter in meters, wire diameter in meters, Shear modulus in Pa, number of coils, desired safety factor against yielding, and yeild stress in Pa.
+* ```spring_rate.m```: Calculates the rate of a spring in N/m given the spring's outer diameter in meters, wire diameter in meters, Shear modulus in Pa, and number of coils. The equations are from [2].
+* ```spring_max_deflection.m```: Calculates the maximum allowable deflection in a spring given the spring's outer diameter in meters, wire diameter in meters, Shear modulus in Pa, number of coils, desired safety factor against yielding, and yeild stress in Pa. The equations are from [2].
 # References
 [1] J. Collins, H. Busby and G. Staab, Mechanical design of machine elements and machines, 2nd ed. Hoboken: John Wiley & Sons, 2010.     
 [2] Budynas, R. G., and Nisbett, J. K., 2011. Shigley’s mechanical engineering design, 9 ed. McGraw-Hill Education.
