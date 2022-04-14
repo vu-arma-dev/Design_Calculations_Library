@@ -36,7 +36,7 @@ ARMA Lab Members: http://arma.vuse.vanderbilt.edu/mediawiki/index.php/Design_Cal
 * ```spring_rate.m```: Calculates the rate of a spring in N/m given the spring's outer diameter in meters, wire diameter in meters, Shear modulus in Pa, and number of coils.
 * ```spring_max_deflection.m```: Calculates the maximum allowable deflection in a spring given the spring's outer diameter in meters, wire diameter in meters, Shear modulus in Pa, number of coils, desired safety factor against yielding, and yeild stress in Pa.
 # References
-[1] J. Collins, H. Busby and G. Staab, Mechanical design of machine elements and machines, 2nd ed. Hoboken: John Wiley & Sons, 2010. 
+[1] J. Collins, H. Busby and G. Staab, Mechanical design of machine elements and machines, 2nd ed. Hoboken: John Wiley & Sons, 2010.     
 [2] Budynas, R. G., and Nisbett, J. K., 2011. Shigley’s mechanical engineering design, 9 ed. McGraw-Hill Education.
 # Disclaimer
 Although these equations are intended to be correct, final designs should not rely on these scripts for critical design calculations.   
